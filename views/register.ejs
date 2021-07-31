@@ -1,0 +1,35 @@
+<%-include("./partials/header")%>
+
+<!-- Form for registering user -->
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-6">
+            <h1 style="text-align: center;">REGISTER</h1>
+            <!-- Form -->
+            <form class="form-example" action="/register" method="POST" onsubmit='disableButton()'>
+                <!-- Input fields -->
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="email" class="form-control username" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" required>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </div>
+                <div class="form-group">
+                    <input type="username" name="username" placeholder="username" class="form-control username" id="exampleInputUsername1"
+                        aria-describedby="usernameHelp" required>
+                    <small id="usernameHelp" class="form-text text-muted">Username should be in lowercase.</small>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="password" class="form-control password"
+                        id="exampleInputPassword1" minlength = "5" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-customized" type="submit" id="btn">Register</button>
+            </form>
+            <!-- Form end -->
+            <a style=" float: center;" href="/campGround"><button style="border: none; background-color: transparent;"><span
+                style="color: rgb(0, 125, 241);">Back</span></button></a>
+        </div>
+    </div>
+</div>
+
+<%-include("./partials/footer")%>

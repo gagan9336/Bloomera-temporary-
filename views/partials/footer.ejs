@@ -1,0 +1,52 @@
+    <!-- JS , J-Query ,Popper.JS  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <!-- Script for page loader -->
+    <script>
+        window.onload = (event) => {
+                $(".loader-wrapper").fadeOut("slow");
+            };
+    </script>
+    <script>
+        $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+    </script>
+    <!-- For modal to show all time -->
+    <!-- <script>
+        $(window).on('load', function () {
+            var delayMs = 2500; // delay in milliseconds
+
+            setTimeout(function () {
+                $('#loginModal-intro').modal('show');
+            }, delayMs);
+        });
+    </script> -->
+    <!-- For modal to show once in 24 hr -->
+    <script>
+        $(function () {
+            var delayMs = 2500;
+            if (!$.cookie('pop')) {
+                $(window).on('load', function () {
+                    var delayMs = 2500; // delay in milliseconds
+
+                    setTimeout(function () {
+                        $('#loginModal-intro').modal('show');
+                    }, delayMs);
+                });
+                $.cookie('pop', '1');
+            }
+        })
+    </script> 
+    
+
+</body>
+</html>

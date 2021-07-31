@@ -1,0 +1,63 @@
+.thumbnail img{
+    width:100%;
+}
+.thumbnail{
+    padding:0;
+}
+.thumbnail .caption-full{
+    padding:9px;
+}
+.pull-right h4{
+    margin: auto auto;
+}
+
+.space {
+    padding-top: auto !important;
+}
+/* body{
+    background-image: url(RedSunset.jpg);
+} */
+
+/* nav{
+    background-image: url(BrokenHearts.jpg);
+} */
+#black{
+    background-color:black;
+}
+#highlight{
+    background-color: rgb(230, 230, 230);
+}
+
+.big-search-1 {
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.big-button-1 {
+    border-radius: 15px;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.styled-form {
+    margin: center;
+}
+
+.margin-show-div {
+    margin-bottom: 15px;
+}
+
+/* Mapbox Maps */
+#map {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.neonText {
+  color: #138496;
+  text-shadow:
+      0 0 7px #138496,
+      0 0 130px #138496;
+}

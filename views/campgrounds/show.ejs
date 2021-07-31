@@ -1,0 +1,146 @@
+<%-include("../partials/header") %>
+
+<!-- Detailed view of post -->
+<div class="container">
+    <div class="row">
+
+        <!-- For map -->
+        <div class="col-md-5">
+            <div id="map"></div>
+        </div>
+
+        <!-- For detailed post -->
+        <div class="col-md-7">
+            <div class="card mb-3">
+                <img class="card-img-top" src="<%=campground.image%>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%=campground.name%>
+                    </h5>
+                    <p class="card-text">
+                        <%=campground.description%>
+                    </p>
+                    <p class="card-text"><small class="text-muted">
+                            <em>Post By <i class="fas fa-arrow-right"></i> <strong>
+                                    <%=campground.author.username%>
+                                </strong> </em>
+                            <p><em><strong>
+                                    <%=campground.author.createdAt%>
+                                </strong> </em></p>
+                        </small></p>
+                    <%if(currentUser && campground.author.id.equals(currentUser._id)){%>
+                        <div class="pull-right inline margin-show-div">
+                            <a class="btn btn-sm btn-warning" href="/campGround/<%=campground._id%>/edit">Edit</a>
+                            <form id="deleteform" action="/campGround/<%=campground._id%>?_method=DELETE"
+                                method="POST" style="display: inline;">
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">Delete</button>
+                            </form>
+                        </div>
+                    <% }; %>
+                </div>
+            </div>
+
+            <!-- For comments -->
+            <div class="card mb-3 pl-2 pr-2" style="border: none;">
+                <div class="text-right">
+                    <a type="button" style="background-color: #c5cdd6" class="btn btn-md btn-block" data-toggle="modal"
+                        data-target="#loginModal">Add Comment</a>
+                </div>
+                <hr>
+                <% campground.comments.forEach((comment)=>{ %>
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-md-12">
+                            <strong>
+                                <%=comment.author.username%>
+                            </strong>
+                            <small class="text-muted">
+                                <p><em><strong>
+                                        <%=comment.author.createdAt%>
+                                    </strong></em></p>
+                                    <div>
+                            </small>
+                            <%=comment.text%>
+                            <%if(currentUser && comment.author.id.equals(currentUser._id)){%>
+                                <!-- Edit comment optional -->
+                                <!-- <a href="/campground/<%=campground._id%>/comments/<%=comment._id%>" class="btn btn-xs btn-warning" >
+                                                        Edit
+                                                        </a> -->
+                                <span class="" style="float: right;">
+                                    <form
+                                        action="/campGround/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE"
+                                        method="POST">
+                                        <input type="submit" id="btn" class="btn btn-sm btn-outline-danger"
+                                            value="Delete">
+                                    </form>
+                                </span>
+                            <% }; %>
+                        </div>
+                        <hr style="border-top: 1px solid rgb(0 0 0)">                        
+                    </div>
+                </div>
+            <%})%>
+        </div>
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: #E9ECEF;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Comment To -</h5>
+                        <button type="button" style="background-color: #E9ECEF;" class="btn btn-sm btn-outline-info"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-weight: 900;"><strong>&times;</strong></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h3 class="text-muted" style="text-align: center; word-wrap: break-word;">
+                            <%=campground.name%>
+                        </h3>
+                        <div>
+                            <form action="/campGround/<%= campground._id%>/comments" method="POST" onsubmit='disableButton1()'>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="comment[text]" placeholder="Comment" required>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-md btn-primary btn-block" id="btn1" type="submit">Submit</button>
+                                </div>
+                            </form>
+                            <!-- <a href="/campGround"><button>Go back!!!</button></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script for google maps -->
+<script>
+function initMap() {
+    var lat = <%=campground.lat%>;
+    var lng = <%=campground.lng%>;
+    var center = { lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 6,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+    <strong><%= campground.name %><br />
+    <%= campground.location %></strong>
+    <p><%= campground.description %></p>
+`
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function () {
+        infowindow.open(map, marker);
+    });
+}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM7s9icl7WSoF3lsIjXX7uFrKVUTJ7pmg&callback=initMap"></script>
+
+<%-include("../partials/footer")%>

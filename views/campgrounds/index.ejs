@@ -1,0 +1,107 @@
+<%-include("../partials/header")%>
+
+<!-- Form for searching memories -->
+  <div class="container">
+    <div class="jumbotron" style="padding: 1rem 0.5rem; border-radius: .8rem;">
+      <p>
+      <form class="styled-form" action="/campGround" method="GET" onsubmit='disableButton()'>
+        <div class="form-group  mb-3">
+          <input class="big-search-1 form-control" type="text" name="search"
+            placeholder="Search For Post, Memories etc...">
+          <button class="big-button-1 btn btn-info btn-block" value="search" type="submit" id="btn">Search</button>
+        </div>
+      </form>
+      </p>
+    </div>
+
+<!-- For Intro Model -->
+<% if(!currentUser){ %>
+    <div class="modal fade" id="loginModal-intro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <!--Content-->
+        <div class="modal-content">   
+          <!--Body-->
+          <div class="modal-body mb-0 p-0">
+
+            <div id="carouselExampleIndicators" class="carousel slide z-depth-1-half" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <!-- <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img class="d-block w-100" src="Stylesheets/memory.jpg" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Start Your Journey!</h5>
+                      <p>Here you can add your memories and capture the beautiful moments of life. So start your journey with Bloomera.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="Stylesheets/memory2.jpg" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Beautiful Life</h5>
+                      <p>Share your beautiful memories with the world and spread love in the world.</p>
+                    </div>
+                </div>
+                <!-- <div class="carousel-item">
+                  <img class="d-block w-100" src="Stylesheets/memory3.jpg" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>...</h5>
+                      <p>...</p>
+                    </div>
+                </div> -->
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+          </div>
+          <!--Footer-->
+          <div class="modal-footer justify-content-center" style="background-color: #E9ECEF;">
+            <p class="text-center">Spread the world!</p>
+            <p class="text-center">Register/Login to explore the world.</p>
+            <p style="inline-size: -webkit-fill-available; text-align: center;">
+              <a type="button" href="/register" class="btn-floating btn-sm btn-fb" data-toggle="tooltip" data-placement="bottom" title="Register">
+                <i class="fas fa-user-plus"></i></a>
+              <!--Twitter-->
+              <a type="button" href="/login" class="btn-floating btn-sm btn-tw" data-toggle="tooltip" data-placement="bottom" title="Login">
+                <i class="fas fa-sign-in-alt"></i></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+<% } %>
+
+<!-- Show all the memories -->
+    <div class="card-columns">
+      <% campGround.reverse().forEach((campGround)=>{%>
+        <div class="card">
+          <img class="card-img-top" src="<%=campGround.image %>" alt="Card image cap">
+          <div class="card-body">
+            <h6 class="card-title">
+              <%= campGround.name%>
+            </h5>
+            <p class="card-text" style="color: rgb(90, 89, 89);">
+              <%= campGround.description.substring(0, 100)%>...
+            </p>
+          </div>
+          <form action="/campGround/<%=campGround._id%>">
+            <div class="card-footer">
+              <small class="text-muted fluid"></small><a href="/campGround/<%=campGround._id%>" style="text-decoration: none;">
+                <button class="btn btn-md btn-info btn-block" type="submit">Read More</button></a></small>
+            </div>
+          </form>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+<%-include("../partials/footer")%>

@@ -1,0 +1,21 @@
+<%-include("./partials/header")%>
+
+<!-- Form for forgot password -->
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-6">
+            <form action="/forgot" method="POST" onsubmit='disableButton()'>
+                <legend>Forgot Password</legend>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" autofocus class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="btn" class="btn btn-primary">Reset Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%-include("./partials/footer")%>

@@ -1,0 +1,31 @@
+<%-include("../partials/header")%>
+
+<!-- Form for editing post -->
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-6">
+            <h1 style="text-align: center;">EDIT</h1>
+            <form action="/campGround/<%=campground._id%>?_method=PUT" method="POST" enctype="multipart/form-data" onsubmit='disableButton()'>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="campground[name]" value="<%=campground.name%>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="location" id="location" value="<%= campground.location %>">
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="5" cols="80" type="text" name="campground[description]"><%=campground.description%></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn">Submit</button>
+                </div>
+            </form>
+            <a style=" float: center;" href="/campGround/<%=campground._id%>"><button class="btn-rounded" style="border: none; background-color: transparent;"><span
+                style="color: rgb(0, 125, 241);">Back</span></button></a>
+        </div>
+    </div>
+</div>
+<%-include("../partials/footer")%>
